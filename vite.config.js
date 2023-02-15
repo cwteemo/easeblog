@@ -8,12 +8,20 @@ export default defineConfig({
         hmr: true,
         port: 3001,
         proxy: {
-            '/api': {
-                target: "http://42.192.142.39/", //目标代理接口地址
+            '/blog': {
+                target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
                 secure: false,
                 changeOrigin: true, //开启代理本地虚拟服务器
                 pathRewrite: {
-                    '^/api': '/api',
+                    '^/blog': '/blog',
+                }
+            },
+            '/user': {
+                target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
+                secure: false,
+                changeOrigin: true, //开启代理本地虚拟服务器
+                pathRewrite: {
+                    '^/user': '/user',
                 }
             }
         }

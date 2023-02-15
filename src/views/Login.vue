@@ -19,12 +19,12 @@
         </el-form-item>
         <el-form-item prop="checkCode">
           <div class="check-code-panel">
-            <el-input placeholder="请输入验证码" v-model="formData.checkCode" class="input-panel"/>
+            <el-input placeholder="请输入验证码" v-model="formData.checkCode" class="input-panel" @keyup.enter.native="login"/>
             <img :src="checkCodeUrl" class="check-code" @click="changeCheckCode"/>
           </div>
         </el-form-item>
         <el-form-item label="">
-          <el-checkbox v-model="formData.rememberMe" :label="true">
+          <el-checkbox v-model="formData.rememberMe" :true-label="1">
             记住我
           </el-checkbox>
         </el-form-item>
@@ -37,11 +37,14 @@
 </template>
 
 <script setup>
-import VueCookie from 'vue-cookies'
+import VueCookies from 'vue-cookies'
 import md5 from 'js-md5'
+import {useRouter} from 'vue-router';
 import {getCurrentInstance, reactive, ref} from "vue";
 
 const {proxy} = getCurrentInstance();
+
+const router = useRouter();
 
 const api = {
   checkCode: "blog/checkCode",
@@ -72,42 +75,67 @@ const rules = {
   }]
 };
 
+
+const init = () => {
+  const loginInfo = VueCookies.get('loginInfo')
+  if (!loginInfo) {
+    return;
+  }
+  Object.assign(formData, loginInfo)
+
+  //监听回车触发登录
+  /*document.onkeydown = (e)=>{
+    if (e.keyCode !== 13){
+      return;
+    }
+    login()
+  }*/
+}
+init();
+
 const login = () => {
   formDataRef.value.validate(async (valid) => {
     if (!valid) {
-      console.log(1);
+      proxy.message.error('登陆失败')
       return false;
     }
-    console.log(2);
+
+    let cookieLoginInfo = VueCookies.get('loginInfo');
+    let cookiePassword = cookieLoginInfo == null ? null : cookieLoginInfo.password
+    if (cookiePassword !== formData.password){
+      formData.password = md5(formData.password);
+    }
+
     let param = {
       account: formData.account,
-      password: md5(formData.password),
+      password: formData.password,
       checkCode: formData.checkCode,
     }
     let result = await proxy.Request({
       url: api.login,
       params: param,
       errorCallback: () => {
-        console.log(3);
         changeCheckCode();
       }
     })
     if (!result) {
-      console.log(4);
       return;
     }
-    console.log(5);
-    VueCookie.set('userInfo',result.data,0)
+
+    proxy.message.success('登陆成功')
+    VueCookies.set('userInfo', result, 0)
     const loginInfo = {
-      account:param.account,
-      password:param.password,
+      account: param.account,
+      password: param.password,
+      rememberMe: formData.rememberMe,
     }
-    console.log(6);
-    if (formData.rememberMe){
-      console.log(7);
-      VueCookie.set('loginInfo',loginInfo,'7d')
+    if (formData.rememberMe == 1) {
+      VueCookies.set('loginInfo', loginInfo, '7d')
     }
-    console.log(8);
+
+    setTimeout(()=>{
+      router.push('/home')
+    },1500)
 
   })
 }
@@ -120,7 +148,7 @@ const login = () => {
   height: calc(100vh);
   background-size: cover;
   background-position: center;
-  background-image: url("../assets/login.jpg")
+  background-image: url("../assets/login-bg.jpg")
 }
 
 .login-panel {

@@ -48,7 +48,7 @@ const router = useRouter();
 
 const api = {
   checkCode: "blog/checkCode",
-  login: 'login',
+  login: 'user/login',
 }
 
 const checkCodeUrl = ref(api.checkCode + "?" + new Date().getTime());
@@ -111,6 +111,7 @@ const login = () => {
       password: formData.password,
       checkCode: formData.checkCode,
     }
+    console.log(param);
     let result = await proxy.Request({
       url: api.login,
       params: param,
@@ -134,7 +135,7 @@ const login = () => {
     }
 
     setTimeout(()=>{
-      router.push('/home')
+      router.push('/')
     },1500)
 
   })

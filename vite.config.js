@@ -11,7 +11,7 @@ export default defineConfig({
             '/blog': {
                 target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
                 secure: false,
-                changeOrigin: true, //开启代理本地虚拟服务器
+                changeOrigin: false, //开启代理本地虚拟服务器
                 pathRewrite: {
                     '^/blog': '/blog',
                 }
@@ -19,9 +19,17 @@ export default defineConfig({
             '/user': {
                 target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
                 secure: false,
-                changeOrigin: true, //开启代理本地虚拟服务器
+                changeOrigin: false, //开启代理本地虚拟服务器
                 pathRewrite: {
                     '^/user': '/user',
+                }
+            },
+            '/file': {
+                target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
+                secure: false,
+                changeOrigin: false, //开启代理本地虚拟服务器
+                pathRewrite: {
+                    '^/file': '/file',
                 }
             }
         }

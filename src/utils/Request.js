@@ -23,7 +23,7 @@ const request = (config) => {
     }
 
     const instance = axios.create({
-        baseURL: '/blog',
+        baseURL: '/',
         timeout: 10 * 1000,
         headers: {
             'Content-Type': contentType,

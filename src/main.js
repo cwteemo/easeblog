@@ -8,9 +8,15 @@ import "@/assets/icon/iconfont.css";
 
 import Request from '@/utils/Request'
 import message from '@/utils/Message'
+import Table from '@/components/Table.vue'
+
 const app = createApp(App);
 app.use(router);
 app.use(ElementPlus);
 app.config.globalProperties.Request = Request;
 app.config.globalProperties.message = message;
+app.config.globalProperties.globalInfo = {
+    imageUrl:"/file/url"
+}
+app.component("Table",Table)
 app.mount('#app');

@@ -9,6 +9,7 @@ import "@/assets/icon/iconfont.css";
 import Request from '@/utils/Request'
 import message from '@/utils/Message'
 import Table from '@/components/Table.vue'
+import Cover from '@/components/Cover.vue'
 
 const app = createApp(App);
 app.use(router);
@@ -19,4 +20,5 @@ app.config.globalProperties.globalInfo = {
     imageUrl:"/file/url"
 }
 app.component("Table",Table)
+app.component("Cover",Cover)
 app.mount('#app');

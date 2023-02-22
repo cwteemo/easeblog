@@ -7,6 +7,16 @@ body{
   box-sizing: border-box;
 }
 
+.op{
+  display: flex;
+  align-items: center;
+}
+
+a.a-link{
+  text-decoration: none;
+  color: rgb(53,118,237);
+}
+
 ::-webkit-scrollbar{
   width: 8px;
   height: 8px;

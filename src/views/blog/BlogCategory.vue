@@ -24,6 +24,13 @@
         </div>
       </template>
     </Table>
+    <Dialog :show="dialogConfig.show"
+            :title="dialogConfig.title"
+            :buttons="dialogConfig.buttons"
+            @close="dialogConfig.show=false"
+    >
+      内容
+    </Dialog>
   </div>
 </template>
 
@@ -85,6 +92,27 @@ const loadDataList = async () => {
   }
   tableData.list = result;
 }
+
+const dialogConfig = reactive({
+  show: true,
+  title:"标题",
+  buttons:[
+    {
+      type:'danger',
+      text:'删除',
+      click:(e)=>{
+        console.log("xx");
+      }
+    },
+    /*{
+      type:'primary',
+      text:'确定',
+      click:(e)=>{
+        console.log("xx");
+      }
+    }*/
+  ]
+})
 </script>
 
 <style lang="scss">

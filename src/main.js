@@ -10,6 +10,7 @@ import Request from '@/utils/Request'
 import message from '@/utils/Message'
 import Table from '@/components/Table.vue'
 import Cover from '@/components/Cover.vue'
+import Dialog from '@/components/Dialog.vue'
 
 const app = createApp(App);
 app.use(router);
@@ -21,4 +22,5 @@ app.config.globalProperties.globalInfo = {
 }
 app.component("Table",Table)
 app.component("Cover",Cover)
+app.component("Dialog",Dialog)
 app.mount('#app');

@@ -129,7 +129,7 @@ const userInfo = ref();
 
 const init = () => {
   userInfo.value = VueCookies.get('userInfo')
-  userInfo.value.avatar = proxy.globalInfo.imageUrl + "?name=" + userInfo.value.avatar;
+  userInfo.value.avatar = proxy.globalInfo.imageUrl + userInfo.value.avatar;
   console.log(userInfo.value);
 }
 init();

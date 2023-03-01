@@ -1,6 +1,6 @@
 <template>
   <div class="cover">
-    <img :src="globalProperties.globalInfo.imageUrl + '?name=' + cover" v-if="cover">
+    <img :src="globalProperties.globalInfo.imageUrl + cover" v-if="cover">
     <img v-else src="../assets/image/user-image.png">
   </div>
 </template>

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2076243",
+      "name": " 增加",
+      "font_class": "file-upload",
+      "unicode": "e889",
+      "unicode_decimal": 59529
+    },
+    {
       "icon_id": "1388124",
       "name": "open",
       "font_class": "close",

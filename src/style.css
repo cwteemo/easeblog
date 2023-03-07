@@ -7,6 +7,12 @@ body{
   box-sizing: border-box;
 }
 
+.not-allow{
+  cursor: not-allowed;
+  color: #dddddd;
+  text-decoration: none;
+}
+
 .op{
   display: flex;
   align-items: center;

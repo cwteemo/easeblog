@@ -7,7 +7,8 @@ import "element-plus/dist/index.css";
 import "@/assets/icon/iconfont.css";
 
 import Request from '@/utils/Request'
-import message from '@/utils/Message'
+import Confirm from '@/utils/Confirm'
+import Message from '@/utils/Message'
 import Table from '@/components/Table.vue'
 import Cover from '@/components/Cover.vue'
 import Dialog from '@/components/Dialog.vue'
@@ -17,7 +18,8 @@ const app = createApp(App);
 app.use(router);
 app.use(ElementPlus);
 app.config.globalProperties.Request = Request;
-app.config.globalProperties.message = message;
+app.config.globalProperties.Confirm = Confirm;
+app.config.globalProperties.Message = Message;
 app.config.globalProperties.globalInfo = {
     imageUrl:"/file/url?name="
 }

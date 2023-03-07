@@ -16,11 +16,12 @@
         <div class="op">
           <a href="javascript:void(0)" class="a-link" @click="showEdit(row)">修改</a>
           <el-divider direction="vertical"></el-divider>
-          <a href="javascript:void(0)" class="a-link">删除</a>
+          <a href="javascript:void(0)" class="a-link" @click="del(row)">删除</a>
           <el-divider direction="vertical"></el-divider>
-          <a href="javascript:void(0)" class="a-link">上移</a>
+          <a href="javascript:void(0)" :class="[index===0?'not-allow':'a-link']" @click="changeSort(index,'up')">上移</a>
           <el-divider direction="vertical"></el-divider>
-          <a href="javascript:void(0)" class="a-link">下移</a>
+          <a href="javascript:void(0)" :class="[index===tableData.list.length-1?'not-allow':'a-link']"
+             @click="changeSort(index,'down')">下移</a>
         </div>
       </template>
     </Table>
@@ -63,6 +64,8 @@ const api = {
   'loadDataList': '/blog/index',
   'saveBlog': '/blog/update',
   'addBlog': '/blog/add',
+  'delBlog': '/blog/del',
+  'updateSort': '/blog/update_sort',
 }
 const columns = [
   {
@@ -187,9 +190,49 @@ const submitForm = (fun_name) => {
       return;
     }
     dialogConfig.show = false
-    globalProperties.message.success("保存成功")
+    globalProperties.Message.success("保存成功")
     loadDataList()
   })
+}
+
+//删除
+const del = (data) => {
+  globalProperties.Confirm(`你确定要删除${data.category_name}`, async () => {
+    let result = await globalProperties.Request({
+      url: api.delBlog,
+      params: {
+        category_id: data.category_id
+      }
+    })
+    if (!result) {
+      return;
+    }
+    loadDataList()
+  })
+}
+
+//修改排序
+const changeSort = async (index, type) => {
+  let categoryList = tableData.list;
+  if (type === 'down' && index === categoryList.length - 1 || type === 'up' && index === 0) {
+    return;
+  }
+  let temp = categoryList[index];
+  let number = type === 'down' ? 1 : -1
+  categoryList.splice(index, 1);
+  categoryList.splice(index + number, 0, temp)
+
+  let result = await globalProperties.Request({
+    url: api.updateSort,
+    type: 'json',
+    params: categoryList
+  })
+
+  if (!result){
+    return;
+  }
+  globalProperties.Message.success("重新排序成功")
+  loadDataList()
 }
 </script>
 

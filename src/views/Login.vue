@@ -96,7 +96,7 @@ init();
 const login = () => {
   formDataRef.value.validate(async (valid) => {
     if (!valid) {
-      proxy.message.error('登陆失败')
+      proxy.Message.error('登陆失败')
       return false;
     }
 
@@ -123,7 +123,7 @@ const login = () => {
       return;
     }
 
-    proxy.message.success('登陆成功')
+    proxy.Message.success('登陆成功')
     VueCookies.set('userInfo', result, 0)
     const loginInfo = {
       account: param.account,

@@ -50,6 +50,7 @@
 
 <script setup>
 import FileUpload from "../../components/FileUpload.vue";
+import Table from "../../components/Table.vue";
 
 import {getCurrentInstance, nextTick, reactive, ref} from "vue";
 // @ts-ignore

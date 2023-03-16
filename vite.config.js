@@ -31,6 +31,14 @@ export default defineConfig({
                 pathRewrite: {
                     '^/file': '/file',
                 }
+            },
+            '/category': {
+                target: "http://42.192.142.39/easyblog/public/index.php", //目标代理接口地址
+                secure: false,
+                changeOrigin: false, //开启代理本地虚拟服务器
+                pathRewrite: {
+                    '^/category': '/category',
+                }
             }
         }
     },

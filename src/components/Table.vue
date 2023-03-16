@@ -53,7 +53,7 @@
       <el-pagination v-if="dataSource.totalCount"
                      background
                      :total="dataSource.totalCount"
-                     :page-sizes="[15, 30, 50, 100]"
+                     :page-sizes="[5, 30, 50, 100]"
                      :page-size="dataSource.pageSize"
                      :current-page.sync="dataSource.pageNo"
                      layout="total, sizes, prev, pager, next, jumper"

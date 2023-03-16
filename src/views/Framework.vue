@@ -254,6 +254,7 @@ watch(route, (newVal, oldVal) => {
 
   .right-main {
     background: #fff;
+    padding: 20px 10px 10px 10px;
   }
 }
 </style>

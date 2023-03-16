@@ -183,9 +183,9 @@ watch(route, (newVal, oldVal) => {
   }
 
   .left-aside {
-    padding-top: 15px;
+    padding-top: 10px;
     margin-left: 10px;
-    width: 300px;
+    width: 280px;
 
     .post-btn {
       background: green;
@@ -253,8 +253,9 @@ watch(route, (newVal, oldVal) => {
   }
 
   .right-main {
+    position: relative;
     background: #fff;
-    padding: 20px 10px 10px 10px;
+    padding: 5px;
   }
 }
 </style>

@@ -15,6 +15,11 @@ const routes = [
         children: [
             {
                 name: '博客管理',
+                path: '/blog/test',
+                component: () => import('../views/blog/Test.vue')
+            },
+            {
+                name: '博客管理',
                 path: '/blog/list',
                 component: () => import('../views/blog/Blog.vue')
             },

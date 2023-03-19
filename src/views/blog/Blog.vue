@@ -76,7 +76,9 @@
         </div>
       </template>
     </Table>
-    <Windows :show="windowsConfig.show" :buttons="windowsConfig.buttons" @close="closeWindows">test</Windows>
+    <Windows :show="windowsConfig.show" :buttons="windowsConfig.buttons" @close="closeWindows">
+      <EditorMarkdown v-model="markdownContent"></EditorMarkdown>
+    </Windows>
   </div>
 </template>
 
@@ -84,6 +86,9 @@
 import Table from "../../components/Table.vue";
 import {reactive, ref} from "vue";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
+
+const markdownContent = ref("# asdasd")
+
 // 在setup 中使用处理
 const api = {
   loadCategory: "/blog/select",
@@ -199,11 +204,11 @@ const closeWindows = () => {
   loadDataList()
 }
 
-const showEdit = (data)=>{
+const showEdit = (data) => {
   windowsConfig.show = true
 }
 
-const addEdit = (data)=>{
+const addEdit = (data) => {
   windowsConfig.show = true
 }
 

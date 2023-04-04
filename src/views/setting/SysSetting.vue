@@ -2,12 +2,10 @@
   <div>系统成员</div>
 </template>
 
-<script>
-export default {
-  name: "SysSetting"
-}
+<script setup>
+
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

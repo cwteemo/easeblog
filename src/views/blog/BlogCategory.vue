@@ -62,11 +62,11 @@ const {globalProperties} = useCurrentInstance();
 
 
 const api = {
-  'loadDataList': '/blog/index',
-  'saveBlog': '/blog/update',
-  'addBlog': '/blog/add',
-  'delBlog': '/blog/del',
-  'updateSort': '/blog/update_sort',
+  'loadDataList': '/category/index',
+  'saveBlog': '/category/update',
+  'addBlog': '/category/add',
+  'delBlog': '/category/del',
+  'updateSort': '/category/update_sort',
 }
 const columns = [
   {

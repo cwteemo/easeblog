@@ -36,7 +36,7 @@
                 <ul class="sub-menu" v-if="menu.open">
                   <li v-for="subMenu in menu.child">
                     <router-link :to="subMenu.path" :class="['sub-menu-item',activePath==subMenu.path?'active':'']">
-                      {{ subMenu.title }}
+                      {{ subMenu.title }}{{subMenu.path}}
                     </router-link>
                   </li>
                 </ul>

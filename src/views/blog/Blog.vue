@@ -28,7 +28,7 @@
           </el-col>
           <el-col :span="5" style="padding-left: 10px">
             <el-button type="primary" @click="loadDataList">搜索</el-button>
-            <el-button type="primary" @click="addEdit(1)">新增</el-button>
+            <el-button type="primary" @click="showEdit('add',raw)">新增</el-button>
           </el-col>
         </el-row>
 
@@ -45,9 +45,9 @@
                 </div>-->
         <Cover :cover="row.cover"></Cover>
       </template>
-      <template #category_desc="{index,row}">
-        <div>标题：{{ row.category_name }}</div>
-        <div>分类：{{ row.category_type }}</div>
+      <template #content="{index,row}">
+        <div>标题：{{ row.title }}</div>
+        <div>分类：{{ row.category_name }}</div>
         <div>作者：{{ row.nick_name }}</div>
       </template>
       <template #type="{index,row}">
@@ -76,23 +76,23 @@
         </div>
       </template>
     </Table>
-    <Windows :show="windowsConfig.show" :buttons="windowsConfig.buttons" @close="closeWindows">
-      <EditorMarkdown v-model="markdownContent"></EditorMarkdown>
-    </Windows>
+    <BlogEdit ref="blogEditRef" @callback="loadDataList"></BlogEdit>
   </div>
 </template>
 
 <script setup>
 import Table from "../../components/Table.vue";
-import {reactive, ref} from "vue";
+import BlogEdit from "./BlogEdit.vue";
+import {onMounted, reactive, ref} from "vue";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
+
 
 const markdownContent = ref("# asdasd")
 
 // 在setup 中使用处理
 const api = {
-  loadCategory: "/blog/select",
-  loadIndex: "/blog/list",
+  loadCategory: "/category/select",
+  loadIndex: "/blog/index",
 }
 const {globalProperties} = useCurrentInstance();
 
@@ -123,13 +123,13 @@ const columns = [
   },
   {
     label: '文章信息',
-    prop: 'category_desc',
+    prop: 'content',
     width: 150,
-    scopedSlots: 'category_desc'
+    scopedSlots: 'content'
   },
   {
     label: '编辑器',
-    prop: 'category_name',
+    prop: 'editor_type',
     width: 100,
   },
   {
@@ -184,33 +184,17 @@ const loadDataList = async () => {
   tableData.value = result
   Object.assign(tableData, result)
 }
-
-//新增
-const windowsConfig = reactive({
-  show: false,
-  buttons: [
-    {
-      type: 'primary',
-      text: '确定',
-      click: (e) => {
-        console.log('xx');
-      }
-    }
-  ]
+onMounted(() => {
+  loadDataList();
 })
 
-const closeWindows = () => {
-  windowsConfig.show = false
-  loadDataList()
+const blogEditRef = ref(null);
+
+const showEdit = (type,data) => {
+  blogEditRef.value.init(type,data)
 }
 
-const showEdit = (data) => {
-  windowsConfig.show = true
-}
 
-const addEdit = (data) => {
-  windowsConfig.show = true
-}
 
 </script>
 

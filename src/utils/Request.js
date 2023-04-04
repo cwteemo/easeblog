@@ -8,7 +8,10 @@ const contentTypeJson = "application/json";
 const contentTypeFile = "multipart/form-data";
 
 const request = (config) => {
+
     let {url, params, dataType = 'form', showLoading = true} = config;
+    console.log(url);
+    console.log(config);
     let contentType = contentTypeForm
     if (dataType === 'json') {
         contentType = contentTypeJson;

@@ -15,6 +15,7 @@ import Dialog from '@/components/Dialog.vue'
 import FileUpload from '@/components/FileUpload.vue'
 import Windows from '@/components/Windows.vue'
 import EditorMarkdown from '@/components/EditorMarkdown.vue'
+import EditorHtml from '@/components/EditorHtml.vue'
 
 const app = createApp(App);
 app.use(router);
@@ -31,4 +32,5 @@ app.component("Dialog",Dialog)
 app.component("FileUpload",FileUpload)
 app.component("Windows",Windows)
 app.component("EditorMarkdown",EditorMarkdown)
+app.component("EditorHtml",EditorHtml)
 app.mount('#app');
